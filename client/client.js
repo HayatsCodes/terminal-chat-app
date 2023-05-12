@@ -1,12 +1,14 @@
 const io = require('socket.io-client');
 
+// connect to the socket server
 const client = io('http://localhost:3001');
 client.on('connect', () => {
     console.log('Connected to server')
 });
 
-client.emit('message', 'Terminal chat app runnning!');
-client.on('message', (message) => {
+
+client.on('chat message', (message) => {
     console.log(message);
 });
 
+module.exports = client;
