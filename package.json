@@ -7,7 +7,7 @@
     "start-server": "node server/server.js",
     "watch-server": "nodemon server/server.js",
     "start-client": "node client/client.js",
-    "watch-client":"nodemon client/client.js",
+    "watch-client": "nodemon client/client.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
   "dependencies": {
     "commander": "^10.0.1",
     "express": "^4.18.2",
+    "inquirer": "^8.2.5",
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1"
   },
