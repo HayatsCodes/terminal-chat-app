@@ -8,6 +8,11 @@ const program = new Command();
 
 program.version('1.0.0').description('Terminal Chat App');
 
+const render = {
+  'Create-Chat-Room': createChatRoom,
+  'Join-Chat-Room': joinChatRoom
+};
+
 
 // Start Terminal chat app
 program

@@ -7,6 +7,7 @@ client.on('connect', () => {
 });
 
 
+
 client.on('chat message', (message) => {
     console.log(message);
 });
