@@ -19,8 +19,5 @@ module.exports = async function joinChatRoom(client, room=null) {
     ]
     const { selectedRoom } = await prompt(chatRoomsOption);
     client.emit('join', selectedRoom);
-    client.on('join', (info) => {
-        console.info(info);
-    })
     chatMessage(client, selectedRoom);
 }

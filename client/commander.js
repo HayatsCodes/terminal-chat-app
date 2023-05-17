@@ -26,7 +26,7 @@ const render = {
 program
   .description('Starts the Terminal chat app')
   .command('start').action(async () => {
-
+    
     const selectedOption = await getMenuOption();
 
     // Exit the app when user select Exit
