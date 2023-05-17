@@ -16,6 +16,7 @@ io.on('connection', (socket) => {
     // Handle 'join' event when a client joins the chat room
     socket.on('join', (room) => {
         socket.join(room);
+        console.log('User joined room');
         socketRoomMap.set(socket.id, room); // Store the room information for the socket connection
         socket.emit('join', `You joined ${room}`);
         socket.broadcast.emit('join', `${socket.id} joined ${room}`);

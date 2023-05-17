@@ -1,5 +1,6 @@
 const { prompt } = require('inquirer');
-
+const chatRoom = require('../../database/models/chatRoom.model');
+const joinChatRoom = require('./joinChatRoom');
 const question = [
     {
         type: 'input',
@@ -8,11 +9,19 @@ const question = [
     }
 ]
 
-function createChatRoom(client) {
+module.exports = function createChatRoom(client) {
     // ask user for the chat room name
-    const roomName = prompt(question)
-    .then(answer => {answer.roomName})
-    // must be unique
-    // create the chat room using socket
-    client.emit('join', roomName)
+    prompt(question)
+        .then((answer) => 
+        { 
+            const roomName = answer.roomName;
+            const isRoomExist = chatRoom.findOne({name: roomName});
+            if (isRoomExist) {
+                console.info('Room already exist')
+                createChatRoom()
+            }
+            chatRoom.create({name: roomName});
+            console.log(`${roomName} chat room created`);
+            joinChatRoom(client, roomName)
+         });
 }

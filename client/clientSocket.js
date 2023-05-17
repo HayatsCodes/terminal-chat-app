@@ -7,9 +7,10 @@ client.on('connect', () => {
 });
 
 
-
 client.on('chat message', (message) => {
-    console.log(message);
+    console.info(message);
 });
 
 module.exports = client;
+
+// How client will emit message after creating/joining a chat room
