@@ -1,6 +1,7 @@
 const { prompt } = require('inquirer');
 const chatRoom = require('../../database/models/chatRoom.model');
 const joinChatRoom = require('./joinChatRoom');
+const chatMessage = require('./chatMessage');
 const question = [
     {
         type: 'input',
@@ -22,6 +23,7 @@ module.exports = function createChatRoom(client) {
             }
             chatRoom.create({name: roomName});
             console.log(`${roomName} chat room created`);
-            joinChatRoom(client, roomName)
+            joinChatRoom(client, roomName);
+            chatMessage(client, roomName);
          });
 }
