@@ -24,6 +24,7 @@ io.on('connection', (socket) => {
 
     // Handle 'chat message' event when a client sends a message
     socket.on('chat message', (room, message) => {
+        console.log('user sent message');
         io.to(room).emit('chat message', message);
     });
 

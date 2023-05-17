@@ -1,5 +1,6 @@
 const { prompt } = require('inquirer');
 const chatRoom = require('../../database/models/chatRoom.model');
+const chatMessage = require('./chatMessage');
 
 module.exports = async function joinChatRoom(client, room=null) {
     if (room) {
@@ -18,5 +19,8 @@ module.exports = async function joinChatRoom(client, room=null) {
     ]
     const { selectedRoom } = await prompt(chatRoomsOption);
     client.emit('join', selectedRoom);
-    chatMessage(client, roomName);
+    client.on('join', (info) => {
+        console.info(info);
+    })
+    chatMessage(client, selectedRoom);
 }

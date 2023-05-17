@@ -5,9 +5,7 @@ const client = io('http://localhost:3001');
 client.on('connect', () => {});
 
 client.on('chat message', (message) => {
-    console.info(message);
+    console.log(message);
 });
 
 module.exports = client;
-
-// How client will emit message after creating/joining a chat room
