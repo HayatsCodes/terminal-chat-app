@@ -1,5 +1,4 @@
 const { Command } = require('commander');
-// const { prompt } = require('inquirer');
 const mongoConnect = require('../database/mongo');
 const client = require('./clientSocket');
 const getMenuOption = require('./utils/getMenuOption');
@@ -9,6 +8,7 @@ const createChatRoom = require('./utils/createChatRoom');
 const joinChatRoom = require('./utils/joinChatRoom');
 const getAuthOption = require('./utils/getAuthOption');
 const exitApp = require('./utils/exitApp');
+require('dotenv').config()
 
 
 mongoConnect()
@@ -34,23 +34,28 @@ const render = {
 program
   .description('Starts the Terminal chat app')
   .command('start').action(async () => {
+    // Check if user still has a valid token
+    const token = process.env.AUTH_TOKEN;
+    if (token.length > 11) {
+      // Display Home menu
+      const homeOption = await getMenuOption();
+    
+      // Render menu interface according to what the user selects
+      await render[homeOption](client);
+    } else {
     // Display Authentication menu
-    const authOption = await getAuthOption();
-
-    // // Exit the app when user select Exit
-    // if (selectedOption === 'Exit') {
-    //   console.info('Exited Terminal Chat App Successfully!');
-    //   process.exit(0);
-    // }
+      const authOption = await getAuthOption();
 
     // Render authentication interface according to what the user selects
-    render[authOption]();
+    await render[authOption]();
 
-    // display home menu  after succesful authentication
+    // Display Home menu  after succesful authentication
     const homeOption = await getMenuOption();
     
     // Render menu interface according to what the user selects
-    render[homeOption](client);
+    await render[homeOption](client);
+    }
+    
   });
 
 program.parse(process.argv);

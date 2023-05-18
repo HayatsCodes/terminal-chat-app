@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require('http');
 const ioServer = require('socket.io');
+const jwt = require('jsonwebtoken');
 const app = require('./routes/user.routes');
 const mongoConnect = require('../database/mongo');
 const User = require('../database/models/user.model');
@@ -28,6 +29,7 @@ io.on('connection', (socket) => {
     
             // Attach the user object to the socket
             socket.user = user;
+            console.log('token passed...');
             next();
         } catch (error) {
             console.error('Authentication error', error);
