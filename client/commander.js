@@ -7,6 +7,9 @@ const registerUser = require('./auth/registerUser');
 const loginUser = require('./auth/loginUser');
 const createChatRoom = require('./utils/createChatRoom');
 const joinChatRoom = require('./utils/joinChatRoom');
+const getAuthOption = require('./utils/getAuthOption');
+const exitApp = require('./utils/exitApp');
+
 
 mongoConnect()
   .then(() => {})
@@ -22,7 +25,8 @@ const render = {
   'Register': registerUser,
   'Login': loginUser,
   'Create-Chat-Room': createChatRoom,
-  'Join-Chat-Room': joinChatRoom
+  'Join-Chat-Room': joinChatRoom,
+  'Exit': exitApp
 };
 
 
@@ -30,17 +34,23 @@ const render = {
 program
   .description('Starts the Terminal chat app')
   .command('start').action(async () => {
+    // Display Authentication menu
+    const authOption = await getAuthOption();
+
+    // // Exit the app when user select Exit
+    // if (selectedOption === 'Exit') {
+    //   console.info('Exited Terminal Chat App Successfully!');
+    //   process.exit(0);
+    // }
+
+    // Render authentication interface according to what the user selects
+    render[authOption]();
+
+    // display home menu  after succesful authentication
+    const homeOption = await getMenuOption();
     
-    const selectedOption = await getMenuOption();
-
-    // Exit the app when user select Exit
-    if (selectedOption === 'Exit') {
-      console.info('Exited Terminal Chat App Successfully!');
-      process.exit(0);
-    }
-
-    // Render interface according to what the user selects
-    render[selectedOption](client);
+    // Render menu interface according to what the user selects
+    render[homeOption](client);
   });
 
 program.parse(process.argv);
