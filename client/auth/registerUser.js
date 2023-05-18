@@ -26,18 +26,15 @@ const registerUser = async () => {
     const answers = await prompt(questions);
     const { username, email, password } = answers;
 
-    console.log(username);
-
     const response = await axios.post('http://localhost:3001/register', {
       username,
       email,
       password,
     });
 
-    console.log(response.data); // Registration successful
+    console.log(response.data.message); // Registration successful
     loginUser(username, password, email);
   } catch (error) {
-    console.log(error.stack);
     console.error(error.response.data); // Registration error
   }
 };

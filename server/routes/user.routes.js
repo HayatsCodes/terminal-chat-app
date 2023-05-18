@@ -1,15 +1,16 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const express = require('express');
-
-const app = express();
 require('dotenv').config();
 const User = require('../../database/models/user.model');
+
+const app = express();
 
 app.use(express.json());
 
 // Register API endpoint
 app.post('/register', async (req, res) => {
     try {
-      console.log(req.body);
       const { username, email, password } = req.body;
   
       // Check if the username or email already exists
@@ -58,7 +59,7 @@ app.post('/login', async (req, res) => {
     // Generate a JWT
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
 
-    res.json({ token });
+    res.json({ token, message: 'Login successful' });
   } catch (error) {
     console.error('Login error', error);
     res.status(500).json({ message: 'Login error' });

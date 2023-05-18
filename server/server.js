@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const ioServer = require('socket.io');
 const app = require('./routes/user.routes');
-
+const mongoConnect = require('../database/mongo');
 
 
 const server = http.createServer(app);
