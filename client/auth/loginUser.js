@@ -43,9 +43,14 @@ const loginUser = async (username, password, email = null) => {
       const token = response.data.token;
       process.env.AUTH_TOKEN = token;
 
-      console.log(response.data); // login successful
+      console.log(response.data.message); // login successful
     } catch (error) {
-      console.error(error.response.data); // login error
+      if (error.response.data.message === 'Invalid username or password') {
+        console.info(error.response.data.message);
+        loginUser(username, password)
+      } else {
+        console.error(error.response.data); 
+      }
     }
   }
 };
