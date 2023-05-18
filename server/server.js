@@ -1,8 +1,8 @@
 const express = require('express');
 const http = require('http');
 const ioServer = require('socket.io');
+const app = require('./routes/user.routes');
 
-const app = express();
 const server = http.createServer(app);
 // set up the socket server and allow all resource to acces the server
 const io = ioServer(server, { cors: { origin: "*" } });
@@ -11,7 +11,7 @@ io.on('connection', (socket) => {
 
 
     // Create a Map to track the room for each socket connection
-    const socketRoomMap = new Map()
+    const socketRoomMap = new Map();
 
     // Handle 'join' event when a client joins the chat room
     socket.on('join', (room) => {
