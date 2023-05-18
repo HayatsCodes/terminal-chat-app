@@ -1,10 +1,15 @@
-require('dotenv').config();
+const express = require('express');
+
 const app = express();
+require('dotenv').config();
 const User = require('../../database/models/user.model');
+
+app.use(express.json());
 
 // Register API endpoint
 app.post('/register', async (req, res) => {
     try {
+      console.log(req.body);
       const { username, email, password } = req.body;
   
       // Check if the username or email already exists

@@ -3,6 +3,8 @@ const { Command } = require('commander');
 const mongoConnect = require('../database/mongo');
 const client = require('./clientSocket');
 const getMenuOption = require('./utils/getMenuOption');
+const registerUser = require('./auth/registerUser');
+const loginUser = require('./auth/loginUser');
 const createChatRoom = require('./utils/createChatRoom');
 const joinChatRoom = require('./utils/joinChatRoom');
 
@@ -17,6 +19,8 @@ const program = new Command();
 program.version('1.0.0').description('Terminal Chat App');
 
 const render = {
+  'Register': registerUser,
+  'Login': loginUser,
   'Create-Chat-Room': createChatRoom,
   'Join-Chat-Room': joinChatRoom
 };
