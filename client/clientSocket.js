@@ -1,10 +1,12 @@
 const io = require('socket.io-client');
+const { retrieveToken } = require('./utils/tokenStorage');
 require('dotenv').config();
 
+const token =  retrieveToken();
 // connect to the socket server
 const client = io('http://localhost:3001', {
     auth: {
-        token: process.env.AUTH_TOKEN
+        token: token
       }
 });
 client.on('connect', () => {});

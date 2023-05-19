@@ -17,6 +17,7 @@ io.on('connection', (socket) => {
     io.use(async (socket, next) => {
         try {
             const token = socket.handshake.auth.token;
+            console.log(token);
 
             // Verify and decode the JWT
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
@@ -29,7 +30,6 @@ io.on('connection', (socket) => {
     
             // Attach the user object to the socket
             socket.user = user;
-            console.log('token passed...');
             next();
         } catch (error) {
             console.error('Authentication error', error);

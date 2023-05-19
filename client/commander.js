@@ -8,11 +8,12 @@ const createChatRoom = require('./utils/createChatRoom');
 const joinChatRoom = require('./utils/joinChatRoom');
 const getAuthOption = require('./utils/getAuthOption');
 const exitApp = require('./utils/exitApp');
+const attachToken = require('./auth/attachToken');
 require('dotenv').config()
 
 
 mongoConnect()
-  .then(() => {})
+  .then(() => { })
   .catch((error) => {
     console.error('MongoDB connection error:', error);
   });
@@ -33,29 +34,22 @@ const render = {
 // Start Terminal chat app
 program
   .description('Starts the Terminal chat app')
-  .command('start').action(async () => {
-    // Check if user still has a valid token
-    const token = process.env.AUTH_TOKEN;
-    if (token.length > 11) {
-      // Display Home menu
-      const homeOption = await getMenuOption();
-    
-      // Render menu interface according to what the user selects
-      await render[homeOption](client);
-    } else {
-    // Display Authentication menu
+  .command('start').action(async () => {   
+      // Display Authentication menu
       const authOption = await getAuthOption();
 
-    // Render authentication interface according to what the user selects
-    await render[authOption]();
+      // Render authentication interface according to what the user selects
+      await render[authOption]();
 
-    // Display Home menu  after succesful authentication
-    const homeOption = await getMenuOption();
-    
-    // Render menu interface according to what the user selects
-    await render[homeOption](client);
+      // Display Home menu  after succesful authentication
+      const homeOption = await getMenuOption();
+
+      // Render menu interface according to what the user selects
+      await render[homeOption](client);
     }
-    
-  });
+
+  );
 
 program.parse(process.argv);
+
+// How to use redis to store the token

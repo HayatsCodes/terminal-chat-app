@@ -57,9 +57,7 @@ app.post('/login', async (req, res) => {
     }
 
     // Generate a JWT
-    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
-      expiresIn: process.env.EXPIRES_IN
-    });
+    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
 
     res.json({ token, message: 'Login successful' });
   } catch (error) {

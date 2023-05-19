@@ -1,5 +1,7 @@
 const axios = require('axios')
 const { prompt } = require('inquirer');
+const client = require('../clientSocket');
+const { storeToken } = require('../utils/tokenStorage');
 
 const loginUser = async (username, password, email = null) => {
   if (email) {
@@ -41,8 +43,7 @@ const loginUser = async (username, password, email = null) => {
       });
 
       const token = response.data.token;
-      process.env.AUTH_TOKEN = token;
-
+      await storeToken(token);
       console.log(response.data.message); // login successful
     } catch (error) {
       if (error.response.data.message === 'Invalid username or password') {
