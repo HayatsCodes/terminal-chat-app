@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
     
             // Attach the user object to the socket
             socket.user = user;
+            console.log(user)
             next();
         } catch (error) {
             console.error('Authentication error', error);
@@ -42,23 +43,21 @@ io.on('connection', (socket) => {
     // Handle 'join' event when a client joins the chat room
     socket.on('join', (room) => {
         socket.join(room);
-        console.log('User joined room');
         socketRoomMap.set(socket.id, room); // Store the room information for the socket connection
         socket.emit('join', `You joined ${room}`);
-        socket.broadcast.emit('join', `${socket.id} joined ${room}`);
+        socket.broadcast.emit('join', `${socket.user.username} joined ${room}`);
     });
 
     // Handle 'chat message' event when a client sends a message
     socket.on('chat message', (room, message) => {
-        console.log('user sent message');
-        io.to(room).emit('chat message', message);
+        io.to(room).emit('chat message', `${socket.user.username}: ${message}`);
     });
 
     // Handle 'disconnect' event when a client disconnects
     socket.on('disconnect', () => {
         const room = socketRoomMap.get(socket.id); // Retrieve the room information for the socket connection
         if (room) {
-            socket.broadcast.to(room).emit('user left', `${socket.id} has left the chat room`);
+            socket.broadcast.to(room).emit('user left', `${socket.user.username} left the chat room`);
             socketRoomMap.delete(socket.id); // Remove the room information for the socket connection
         }
     });

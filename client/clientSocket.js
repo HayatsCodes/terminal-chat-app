@@ -13,7 +13,7 @@ client.on('connect', () => {});
 
 // Handles 'chat message' event when another user sends a message
 client.on('chat message', (message) => {
-    console.log(message);
+    console.info(message);
 });
 
 // Handles 'join' event when a user join a room
