@@ -17,7 +17,6 @@ io.on('connection', (socket) => {
     io.use(async (socket, next) => {
         try {
             const token = socket.handshake.auth.token;
-            console.log(token);
 
             // Verify and decode the JWT
             const decoded = jwt.verify(token, process.env.SECRET_KEY);

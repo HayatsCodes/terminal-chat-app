@@ -8,7 +8,6 @@ const createChatRoom = require('./utils/createChatRoom');
 const joinChatRoom = require('./utils/joinChatRoom');
 const getAuthOption = require('./utils/getAuthOption');
 const exitApp = require('./utils/exitApp');
-const attachToken = require('./auth/attachToken');
 require('dotenv').config()
 
 
