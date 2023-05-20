@@ -1,4 +1,3 @@
-const express = require('express');
 const http = require('http');
 const ioServer = require('socket.io');
 const jwt = require('jsonwebtoken');
@@ -12,9 +11,8 @@ const server = http.createServer(app);
 // set up the socket server and allow all resource to acces the server
 const io = ioServer(server, { cors: { origin: "*" } });
 
-io.on('connection', (socket) => {
-    // Authentication middleware
-    io.use(async (socket, next) => {
+// Authentication middleware
+io.use(async (socket, next) => {
         try {
             const token = socket.handshake.auth.token;
 
@@ -28,8 +26,9 @@ io.on('connection', (socket) => {
             }
     
             // Attach the user object to the socket
-            socket.user = user;
-            console.log(user)
+            socket.username = user.username;
+            console.log('user', socket.username);
+            
             next();
         } catch (error) {
             console.error('Authentication error', error);
@@ -37,33 +36,41 @@ io.on('connection', (socket) => {
           }
     });
 
+
+io.on('connection', (socket) => {
+    
+
     // Create a Map to track the room for each socket connection
     const socketRoomMap = new Map();
+    const socketObject = {};
 
     // Handle 'join' event when a client joins the chat room
     socket.on('join', (room) => {
+        // when a user joins a room, the socket.rooms should be stored
+        // in a key value object along with the username
         socket.join(room);
-        socketRoomMap.set(socket.id, room); // Store the room information for the socket connection
-        socket.emit('join', `You joined ${room}`);
-        socket.broadcast.emit('join', `${socket.user.username} joined ${room}`);
+        // console.log(socket.rooms);
+        socketRoomMap.set(socket.username, room); // Store the room information for the socket connection
+        socket.emit('joined', `You joined ${room}`);
+        socket.broadcast.emit('user joined', `${socket.username} joined ${room}`);
     });
 
     // Handle 'chat message' event when a client sends a message
     socket.on('chat message', (room, message) => {
-        io.to(room).emit('chat message', `${socket.user.username}: ${message}`);
+        io.to(room).emit('chat message', `${socket.username}: ${message}`);
     });
 
     // Handle 'disconnect' event when a client disconnects
-    socket.on('disconnect', () => {
-        const room = socketRoomMap.get(socket.id); // Retrieve the room information for the socket connection
+    socket.on('disconnecting', () => {
+        const room = socketRoomMap.get(socket.username); // Retrieve the room information for the socket connection
         if (room) {
-            socket.broadcast.to(room).emit('user left', `${socket.user.username} left the chat room`);
-            socketRoomMap.delete(socket.id); // Remove the room information for the socket connection
+            socket.broadcast.to(room).emit('user left', `${socket.username} left the chat room`);
+            socketRoomMap.delete(socket.username); // Remove the room information for the socket connection
         }
     });
 });
 
-server.listen(3001, () => {
+server.listen(3000, () => {
     mongoConnect()
         .then(() => { })
         .catch((error) => {
@@ -71,3 +78,11 @@ server.listen(3001, () => {
         });
     console.log('Server started running...');
 });
+
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error.stack);
+    // Perform any necessary cleanup or logging here
+  
+    // Gracefully exit the process
+    process.exit(1);
+  });

@@ -37,7 +37,7 @@ const loginUser = async (username, password, email = null) => {
       const answers = await prompt(questions);
       const { username, password } = answers;
 
-      const response = await axios.post('http://localhost:3001/login', {
+      const response = await axios.post('http://localhost:3000/login', {
         username,
         password,
       });

@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const token =  retrieveToken();
 // connect to the socket server
-const client = io('http://localhost:3001', {
+const client = io('http://localhost:3000', {
     auth: {
         token: token
       }
@@ -16,8 +16,12 @@ client.on('chat message', (message) => {
     console.info(message);
 });
 
-// Handles 'join' event when a user join a room
-client.on('join', (info) => {
+
+client.on('joined', (info) => {
+    console.info(info);
+});
+
+client.on('user joined', (info) => {
     console.info(info);
 });
 
