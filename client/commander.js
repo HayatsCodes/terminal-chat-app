@@ -7,7 +7,7 @@ const createChatRoom = require('./utils/createChatRoom');
 const joinChatRoom = require('./utils/joinChatRoom');
 const getAuthOption = require('./utils/getAuthOption');
 const exitApp = require('./utils/exitApp');
-const clientListeners = require('./clientListeners');
+const attachEvents = require('./attachEvents');
 const io = require('socket.io-client');
 
 // connect to the database
@@ -47,8 +47,8 @@ program
       }
     });
 
-    // Listen to events
-    clientListeners(client);
+    // Attach events to client
+    attachEvents(client);
 
     // Display Home menu  after succesful authentication
     const homeOption = await getMenuOption();
@@ -60,5 +60,3 @@ program
   );
 
 program.parse(process.argv);
-
-// How to use redis to store the token

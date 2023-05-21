@@ -38,12 +38,12 @@ module.exports = (io) => {
             // console.log(socket.rooms);
             socketRoomMap.set(socket.username, room); // Store the room information for the socket connection
             socket.emit('joined', `You joined ${room}`);
-            socket.broadcast.emit('user joined', `${socket.username} joined ${room}`);
+            socket.broadcast.to(room).emit('user joined', `${socket.username} joined ${room}`);
         });
 
         // Handle 'chat message' event when a client sends a message
         socket.on('chat message', (room, message) => {
-            io.to(room).emit('chat message', `${socket.username}: ${message}`);
+            socket.broadcast.to(room).emit('chat message', `${socket.username}: ${message}`);
         });
 
         // Handle 'disconnect' event when a client disconnects

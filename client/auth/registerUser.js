@@ -26,7 +26,7 @@ const registerUser = async () => {
     const answers = await prompt(questions);
     const { username, email, password } = answers;
 
-    const response = await axios.post('http://localhost:3001/register', {
+    const response = await axios.post('http://localhost:3001/auth/register', {
       username,
       email,
       password,
