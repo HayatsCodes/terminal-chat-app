@@ -5,9 +5,9 @@ const loginUser = require('./src/auth/loginUser');
 const getAuthOption = require('./src/views/getAuthOption');
 const getMenuOption = require('./src/views/getMenuOption');
 const chatMessage = require('./src/views/chatMessage');
-const createChatRoom = require('./src/controller/createChatRoom');
-const joinChatRoom = require('./src/controller/joinChatRoom');
-const exitApp = require('./src/controller/exitApp');
+const createChatRoom = require('./src/menu/createChatRoom');
+const joinChatRoom = require('./src/menu/joinChatRoom');
+const exitApp = require('./src/menu/exitApp');
 const attachEvents = require('./attachEvents');
 
 const program = new Command();
