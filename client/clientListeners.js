@@ -1,4 +1,4 @@
-module.export = (client) => {
+module.exports = (client) => {
     
     client.on('connect', () => { });
 

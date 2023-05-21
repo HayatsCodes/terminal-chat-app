@@ -8,7 +8,6 @@ const joinChatRoom = require('./utils/joinChatRoom');
 const getAuthOption = require('./utils/getAuthOption');
 const exitApp = require('./utils/exitApp');
 const clientListeners = require('./clientListeners');
-require('dotenv').config()
 const io = require('socket.io-client');
 
 // connect to the database

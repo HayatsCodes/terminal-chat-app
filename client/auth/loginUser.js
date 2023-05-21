@@ -1,7 +1,5 @@
 const axios = require('axios')
 const { prompt } = require('inquirer');
-const client = require('../clientListeners');
-const { storeToken } = require('../utils/tokenStorage');
 
 const loginUser = async (username, password, email = null) => {
   if (email) {

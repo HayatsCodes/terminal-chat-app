@@ -6,8 +6,6 @@
   "scripts": {
     "start-server": "node server/server.js",
     "watch-server": "nodemon server/server.js",
-    "start-client": "node client/client.js",
-    "watch-client": "nodemon client/client.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,10 +20,8 @@
     "inquirer": "^8.2.5",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.1",
-    "redis": "^4.6.6",
     "socket.io": "^4.6.1",
-    "socket.io-client": "^4.6.1",
-    "uuid": "^9.0.0"
+    "socket.io-client": "^4.6.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
