@@ -1,6 +1,5 @@
 const { prompt } = require('inquirer');
 const joinChatRoom = require('./joinChatRoom');
-const chatMessage = require('./chatMessage');
 const axios = require('axios');
 const question = [
   {
@@ -21,8 +20,7 @@ module.exports = async function createChatRoom(client) {
     const chatRoom = response.data;
     console.log(`${chatRoom} chat room created`);
     joinChatRoom(client, chatRoom);
-    chatMessage(client, chatRoom);
-
+    return chatRoom;
   } catch (error) {
     if (error.response.data.message) {
       console.info(error.response.data.message);

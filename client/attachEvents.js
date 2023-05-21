@@ -7,7 +7,6 @@ module.exports = (client) => {
       console.info(message);
     });
 
-
     client.on('joined', (info) => {
       console.info(info);
     });

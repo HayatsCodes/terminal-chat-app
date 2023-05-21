@@ -1,21 +1,14 @@
 const { Command } = require('commander');
-const mongoConnect = require('./src/config/mongo');
-const getMenuOption = require('./utils/getMenuOption');
-const registerUser = require('./auth/registerUser');
-const loginUser = require('./auth/loginUser');
-const createChatRoom = require('./utils/createChatRoom');
-const joinChatRoom = require('./utils/joinChatRoom');
-const getAuthOption = require('./utils/getAuthOption');
-const exitApp = require('./utils/exitApp');
-const attachEvents = require('./attachEvents');
 const io = require('socket.io-client');
-
-// connect to the database
-mongoConnect()
-  .then(() => { })
-  .catch((error) => {
-    console.error('MongoDB connection error:', error);
-  });
+const registerUser = require('./src/auth/registerUser');
+const loginUser = require('./src/auth/loginUser');
+const getAuthOption = require('./src/views/getAuthOption');
+const getMenuOption = require('./src/views/getMenuOption');
+const chatMessage = require('./src/views/chatMessage');
+const createChatRoom = require('./src/controller/createChatRoom');
+const joinChatRoom = require('./src/controller/joinChatRoom');
+const exitApp = require('./src/controller/exitApp');
+const attachEvents = require('./attachEvents');
 
 const program = new Command();
 
@@ -54,7 +47,10 @@ program
     const homeOption = await getMenuOption();
 
     // Render menu interface according to what the user selects
-    await render[homeOption](client);
+    const chatRoom = await render[homeOption](client);
+
+    // Start chat room messaging
+    chatMessage(client, chatRoom);
   }
 
   );

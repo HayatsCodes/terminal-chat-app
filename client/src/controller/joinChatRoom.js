@@ -1,6 +1,5 @@
 const { prompt } = require('inquirer');
 const axios = require('axios');
-const chatMessage = require('./chatMessage');
 
 module.exports = async function joinChatRoom(client, chatRoom = null) {
     if (chatRoom) {
@@ -18,6 +17,6 @@ module.exports = async function joinChatRoom(client, chatRoom = null) {
         ]
         const { selectedRoom } = await prompt(chatRoomsOption);
         client.emit('join', selectedRoom);
-        chatMessage(client, selectedRoom);
+        return selectedRoom;
     }
 }
