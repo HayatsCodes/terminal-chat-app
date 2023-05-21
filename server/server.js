@@ -1,7 +1,7 @@
 const http = require('http');
 const ioServer = require('socket.io');
 const app = require('./app');
-const mongoConnect = require('../database/mongo');
+const mongoConnect = require('./src/config/mongo');
 const socketManager = require('./socketManager');
 require('dotenv').config();
 

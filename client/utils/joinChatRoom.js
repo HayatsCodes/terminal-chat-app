@@ -1,5 +1,5 @@
 const { prompt } = require('inquirer');
-const chatRoom = require('../../database/models/chatRoom.model');
+const chatRoom = require('../../server/src/models/chatRoom.model');
 const chatMessage = require('./chatMessage');
 
 module.exports = async function joinChatRoom(client, room = null) {
