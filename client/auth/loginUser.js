@@ -1,6 +1,6 @@
 const axios = require('axios')
 const { prompt } = require('inquirer');
-const client = require('../clientSocket');
+const client = require('../clientListeners');
 const { storeToken } = require('../utils/tokenStorage');
 
 const loginUser = async (username, password, email = null) => {
@@ -12,9 +12,9 @@ const loginUser = async (username, password, email = null) => {
       });
 
       const token = response.data.token;
-      process.env.AUTH_TOKEN = token;
 
       console.log(response.data.message); // login successful
+      return token;
 
     } catch (error) {
       console.error(error.response.data); // login error
@@ -37,18 +37,18 @@ const loginUser = async (username, password, email = null) => {
       const answers = await prompt(questions);
       const { username, password } = answers;
 
-      const response = await axios.post('http://localhost:3000/login', {
+      const response = await axios.post('http://localhost:3001/login', {
         username,
         password,
       });
 
       const token = response.data.token;
-      await storeToken(token);
       console.log(response.data.message); // login successful
+      return token;
     } catch (error) {
       if (error.response.data.message === 'Invalid username or password') {
         console.info(error.response.data.message);
-        loginUser(username, password)
+        loginUser(username, password);
       } else {
         console.error(error.response.data); 
       }

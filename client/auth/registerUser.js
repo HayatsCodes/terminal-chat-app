@@ -26,7 +26,7 @@ const registerUser = async () => {
     const answers = await prompt(questions);
     const { username, email, password } = answers;
 
-    const response = await axios.post('http://localhost:3000/register', {
+    const response = await axios.post('http://localhost:3001/register', {
       username,
       email,
       password,
@@ -34,7 +34,8 @@ const registerUser = async () => {
 
     console.info(response.data.message); // Registration successful
     console.info('-----------------------');
-    loginUser(username, password, email);
+    const token = loginUser(username, password, email);
+    return token;
   } catch (error) {
     if ( error.response.data.message === 'Username or email already exists') {
       console.info(error.response.data.message);
