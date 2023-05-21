@@ -1,5 +1,5 @@
 const { Command } = require('commander');
-const mongoConnect = require('../server/src/config/mongo');
+const mongoConnect = require('./src/config/mongo');
 const getMenuOption = require('./utils/getMenuOption');
 const registerUser = require('./auth/registerUser');
 const loginUser = require('./auth/loginUser');

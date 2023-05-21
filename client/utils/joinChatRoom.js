@@ -1,12 +1,13 @@
 const { prompt } = require('inquirer');
-const chatRoom = require('../../server/src/models/chatRoom.model');
+const axios = require('axios');
 const chatMessage = require('./chatMessage');
 
-module.exports = async function joinChatRoom(client, room = null) {
-    if (room) {
-        client.emit('join', room);
+module.exports = async function joinChatRoom(client, chatRoom = null) {
+    if (chatRoom) {
+        client.emit('join', chatRoom);
     } else {
-        const chatRooms = await chatRoom.find().select('name');
+        const response = await axios.get('http://localhost:3001/api/chatrooms');
+        const chatRooms = response.data;
         const chatRoomsOption = [
             {
                 type: 'list',

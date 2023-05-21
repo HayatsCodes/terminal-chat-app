@@ -1,28 +1,34 @@
 const { prompt } = require('inquirer');
-const chatRoom = require('../../server/src/models/chatRoom.model');
 const joinChatRoom = require('./joinChatRoom');
 const chatMessage = require('./chatMessage');
+const axios = require('axios');
 const question = [
-    {
-        type: 'input',
-        name: 'roomName',
-        message: 'Enter Room Name'
-    }
+  {
+    type: 'input',
+    name: 'roomName',
+    message: 'Enter Room Name'
+  }
 ]
 
 module.exports = async function createChatRoom(client) {
-  const answer = await prompt(question);
-  const roomName = answer.roomName;
+  try {
+    const answer = await prompt(question);
+    const roomName = answer.roomName;
 
-  const isRoomExist = await chatRoom.findOne({ name: roomName });
+    const response = await axios.post('http://localhost:3001/api/chatrooms', {
+      roomName
+    });
+    const chatRoom = response.data;
+    console.log(`${chatRoom} chat room created`);
+    joinChatRoom(client, chatRoom);
+    chatMessage(client, chatRoom);
 
-  if (isRoomExist) {
-    console.info('Room already exists');
-    createChatRoom(client); // Recursive call to prompt again
-  } else {
-    await chatRoom.create({ name: roomName });
-    console.log(`${roomName} chat room created`);
-    joinChatRoom(client, roomName);
-    chatMessage(client, roomName);
+  } catch (error) {
+    if (error.response.data.message) {
+      console.info(error.response.data.message);
+      createChatRoom(client); // Recursive call to prompt again
+    } else {
+      console.error(error);
+    }
   }
 };

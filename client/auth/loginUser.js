@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('axios');
 const { prompt } = require('inquirer');
 
 const loginUser = async (username, password, email = null) => {
