@@ -6,18 +6,17 @@ const render = require('./renderInterface');
 const getToken = require('../auth/getToken');
 const attachEvents = require('../../attachEvents');
 
-
-
-
-// ...
-
 function chatMessageInterface(client, chatRoom) {
+  console.info('----------------------------------------------');
+  console.info('Press -h to go Home.');
+  console.info('Press -e to Exit.');
+  console.info('----------------------------------------------');
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
 
-  // Variable to store the resolved username
   let clientUsername;
 
   // Event listener for the 'username' event
@@ -62,8 +61,6 @@ function chatMessageInterface(client, chatRoom) {
     client.emit('chat message', chatRoom, message);
   });
 }
-
-// ...
 
 
 module.exports = chatMessageInterface;
