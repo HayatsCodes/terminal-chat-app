@@ -1,26 +1,23 @@
 const { Command } = require('commander');
 const io = require('socket.io-client');
-const registerUser = require('./src/auth/registerUser');
-const loginUser = require('./src/auth/loginUser');
+
 const getAuthOption = require('./src/views/getAuthOption');
 const getMenuOption = require('./src/views/getMenuOption');
-const chatMessage = require('./src/views/chatMessage');
-const createChatRoom = require('./src/menu/createChatRoom');
-const joinChatRoom = require('./src/menu/joinChatRoom');
-const exitApp = require('./src/menu/exitApp');
+const chatMessage = require('./src/views/chatMessageInterface');
+const render = require('./src/views/renderInterface');
 const attachEvents = require('./attachEvents');
 
 const program = new Command();
 
 program.version('1.0.0').description('Terminal Chat App');
 
-const render = {
-  'Register': registerUser,
-  'Login': loginUser,
-  'Create-Chat-Room': createChatRoom,
-  'Join-Chat-Room': joinChatRoom,
-  'Exit': exitApp
-};
+// const render = {
+//   'Register': registerUser,
+//   'Login': loginUser,
+//   'Create-Chat-Room': createChatRoom,
+//   'Join-Chat-Room': joinChatRoom,
+//   'Exit': exitApp
+// };
 
 
 // Start Terminal chat app
