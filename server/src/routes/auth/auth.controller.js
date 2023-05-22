@@ -73,7 +73,6 @@ async function getToken(req, res) {
     res.status(500).json({ message: 'Couldn\'t get token' });
   }
 
-
 }
 
 module.exports = {

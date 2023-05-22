@@ -33,6 +33,8 @@ module.exports = (io) => {
 
         // Handle 'join' event when a client joins the chat room
         socket.on('join', (room) => {
+            // Emits the username to the client
+            socket.emit('username', socket.username);
 
             socket.join(room);
             // console.log(socket.rooms);

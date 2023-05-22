@@ -1,5 +1,6 @@
 const http = require('http');
 const ioServer = require('socket.io');
+const redisClient = require('./src/utils/redisClient');
 const app = require('./app');
 const mongoConnect = require('./src/config/mongo');
 const socketManager = require('./socketManager');
@@ -14,13 +15,11 @@ const io = ioServer(server, { cors: { origin: "*" } });
 // Manage socket connections
 socketManager(io);
 
-server.listen(3001, () => {
+server.listen(3001, async () => {
     // Connect to Mongo
-    mongoConnect()
-        .then(() => { })
-        .catch((error) => {
-            console.error('MongoDB connection error: ', error);
-        });
+    await mongoConnect();
+    // connect to redis
+    await redisClient.connect();
     console.log('Server started running...');
 });
 

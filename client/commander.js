@@ -3,7 +3,7 @@ const io = require('socket.io-client');
 
 const getAuthOption = require('./src/views/getAuthOption');
 const getMenuOption = require('./src/views/getMenuOption');
-const chatMessage = require('./src/views/chatMessageInterface');
+const chatMessageInterface = require('./src/views/chatMessageInterface');
 const render = require('./src/views/renderInterface');
 const attachEvents = require('./attachEvents');
 
@@ -47,9 +47,13 @@ program
     const chatRoom = await render[homeOption](client);
 
     // Start chat room messaging
-    chatMessage(client, chatRoom);
+    chatMessageInterface(client, chatRoom);
   }
-
   );
 
 program.parse(process.argv);
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  process.exit(1);
+});
