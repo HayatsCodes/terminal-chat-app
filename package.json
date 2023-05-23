@@ -6,7 +6,7 @@
   "scripts": {
     "start-server": "node server/server.js",
     "watch-server": "nodemon server/server.js",
-    "test": "jest"
+    "test-server": "npm test --prefix server"
   },
   "keywords": [],
   "author": ""

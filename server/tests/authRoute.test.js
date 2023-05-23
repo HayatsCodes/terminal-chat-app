@@ -91,7 +91,7 @@ describe('Auth Routes', () => {
       expect(response.body.token).toBeDefined();
     });
 
-    it('should return an error for invalid username or password', async () => {
+    test('should return an error for invalid username or password', async () => {
       const response = await request(app)
         .post('/auth/login')
         .send({
@@ -106,7 +106,7 @@ describe('Auth Routes', () => {
 
   // Get Token Test
   describe('GET /token/:id', () => {
-    it('should get a token for the user', async () => {
+    test('should get a token for the user', async () => {
       // Create a test user
       const hashedPassword = await bcrypt.hash(testUser.password, 10);
       const newUser = new User({
@@ -122,13 +122,11 @@ describe('Auth Routes', () => {
 
       const response = await request(app).get(`/auth/tokens/${testUser2.username}`);
 
-      console.log(response.body);
-
       expect(response.statusCode).toBe(200);
       expect(response.body).toBe(token);
     });
 
-    it('should return an error if no token found', async () => {
+    test('should return an error if no token found', async () => {
       const response = await request(app).get('/auth/tokens/nonexistentuser');
 
       expect(response.statusCode).toBe(400);

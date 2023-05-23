@@ -2,7 +2,7 @@ name: Test Server CI
 
 on:
   push:
-    branches: [dev]
+    branches: [main, dev]
     paths:
       - 'server/**' # Only trigger if changes are made inside the server folder
   pull_request:
