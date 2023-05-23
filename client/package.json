@@ -1,14 +1,19 @@
 {
   "name": "terminal-chat-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A chat app that allows users to join public chat rooms and chat from the command-line and also allows for user to create new chat room",
   "main": "index.js",
   "preferGlobal": true,
   "bin": "./commander.js",
   "scripts": {
     "test": "jest"
   },
-  "keywords": ["terminal", "command-line", "chat app", "socket.io-client"],
+  "keywords": [
+    "terminal",
+    "command-line",
+    "chat app",
+    "socket.io-client"
+  ],
   "author": "Hayatudeen Abdulrahman (HayatsCodes)",
   "license": "MIT",
   "dependencies": {

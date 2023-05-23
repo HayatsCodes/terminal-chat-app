@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const { Command } = require('commander');
 const io = require('socket.io-client');
 
