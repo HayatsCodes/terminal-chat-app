@@ -21,8 +21,13 @@ program
     // Render authentication interface according to what the user selects
     const token = await render[authOption]();
 
+    if (!token) {
+      console.info('Authentication Error!');
+      process.exit(1);
+    }
+
     // connect to the socket server after authentication
-    const client = io('http://localhost:3001', {
+    const client = io('https://terminal-chat-app-production.up.railway.app', {
       auth: {
         token
       }

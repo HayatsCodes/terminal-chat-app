@@ -5,7 +5,7 @@ module.exports = async function joinChatRoom(client, chatRoom = null) {
     if (chatRoom) {
         client.emit('join', chatRoom);
     } else {
-        const response = await axios.get('http://localhost:3001/api/chatrooms');
+        const response = await axios.get('https://terminal-chat-app-production.up.railway.app/api/chatrooms');
         const chatRooms = response.data;
         const chatRoomsOption = [
             {
