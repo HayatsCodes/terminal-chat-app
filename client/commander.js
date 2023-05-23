@@ -11,15 +11,6 @@ const program = new Command();
 
 program.version('1.0.0').description('Terminal Chat App');
 
-// const render = {
-//   'Register': registerUser,
-//   'Login': loginUser,
-//   'Create-Chat-Room': createChatRoom,
-//   'Join-Chat-Room': joinChatRoom,
-//   'Exit': exitApp
-// };
-
-
 // Start Terminal chat app
 program
   .description('Starts the Terminal chat app')
