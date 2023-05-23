@@ -34,7 +34,7 @@ jobs:
 
       - name: Test server
         env:
-          SECRET: KGGL>HKHVHKWKBKJKJLMNOPKFGHN@$MGTH
+          SECRET_KEY: KGGL>HKHVHKWKBKJKJLMNOPKFGHN@$MGTH
           REDIS_HOST: localhost
           REDIS_PORT: 6379
         run: |
