@@ -1,5 +1,4 @@
-## About
-The Terminal Chat App is a command-line chat application that allows users to join public chat rooms and chat from the command-line interface. Users can also create new chat rooms and interact with other users in real-time
+The tarminal-chat-app is a command-line chat application that allows users to join public chat rooms and chat from the command-line interface. Users can also create new chat rooms and interact with other users in real-time
 
 ## Features
 - Command-line interface
