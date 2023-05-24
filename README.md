@@ -4,8 +4,9 @@ This is a project for the GitHub + DEV 2023 Hackathon.
 ## About
 The Terminal Chat App is a command-line chat application that allows users to join public chat rooms and chat from the command-line interface. Users can also create new chat rooms and interact with other users in real-time
 
-## DEMO
-[![App Demo](https://img.youtube.com/vi/q7R8VUhbzQs/maxresdefault.jpg)](https://www.youtube.com/watch?v=q7R8VUhbzQs)
+## Demo
+
+https://github.com/HayatsCodes/terminal-chat-app/assets/104792493/ec180bba-6b5e-45a1-b457-b21b333222c6
 
 ## Features
 - Command-line interface
