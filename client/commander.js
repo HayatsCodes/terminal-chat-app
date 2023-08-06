@@ -28,7 +28,7 @@ program
     }
 
     // connect to the socket server after authentication
-    const client = io('https://terminal-chat-app-production.up.railway.app', {
+    const client = io('https://command-line-chat-app.onrender.com', {
       auth: {
         token
       }

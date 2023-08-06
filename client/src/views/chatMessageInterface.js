@@ -40,7 +40,7 @@ function chatMessageInterface(client, chatRoom) {
       client.disconnect();
 
       // create a new client connection
-      const newClient = io('https://terminal-chat-app-production.up.railway.app', {
+      const newClient = io('https://command-line-chat-app.onrender.com', {
         auth: {
           token
         }

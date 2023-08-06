@@ -26,7 +26,7 @@ const registerUser = async () => {
     const answers = await prompt(questions);
     const { username, email, password } = answers;
 
-    const response = await axios.post('https://terminal-chat-app-production.up.railway.app/auth/register', {
+    const response = await axios.post('https://command-line-chat-app.onrender.com/auth/register', {
       username,
       email,
       password,

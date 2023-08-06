@@ -4,7 +4,7 @@ const { prompt } = require('inquirer');
 const loginUser = async (username, password, email = null) => {
   if (email) {
     try {
-      const response = await axios.post('https://terminal-chat-app-production.up.railway.app/auth/login', {
+      const response = await axios.post('https://command-line-chat-app.onrender.com/auth/login', {
         username,
         password,
       });
@@ -35,7 +35,7 @@ const loginUser = async (username, password, email = null) => {
       const answers = await prompt(questions);
       const { username, password } = answers;
 
-      const response = await axios.post('https://terminal-chat-app-production.up.railway.app/auth/login', {
+      const response = await axios.post('https://command-line-chat-app.onrender.com/auth/login', {
         username,
         password,
       });

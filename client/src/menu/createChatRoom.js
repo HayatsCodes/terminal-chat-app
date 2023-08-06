@@ -14,7 +14,7 @@ module.exports = async function createChatRoom(client) {
     const answer = await prompt(question);
     const roomName = answer.roomName;
 
-    const response = await axios.post('https://terminal-chat-app-production.up.railway.app/api/chatrooms', {
+    const response = await axios.post('https://command-line-chat-app.onrender.com/api/chatrooms', {
       roomName
     });
     const chatRoom = response.data;
